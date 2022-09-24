@@ -33,6 +33,7 @@ async def get_user_by_email(users_collection, email):
 
 async def update_user(users_collection, user_id, user_data):
     try:
+        # filtrando os que não são nulos
         data = {k: v for k, v in user_data.items() if v is not None}
 
         user = await users_collection.update_one(
