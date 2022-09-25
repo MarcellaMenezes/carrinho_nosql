@@ -8,5 +8,5 @@ from src.controllers.products import products_crud
 
 loop = asyncio.get_event_loop()
 # loop.run_until_complete(users_crud())
-# loop.run_until_complete(address_crud())
-loop.run_until_complete(products_crud())
+loop.run_until_complete(address_crud())
+# loop.run_until_complete(products_crud())

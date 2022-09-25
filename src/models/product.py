@@ -8,7 +8,7 @@ async def create_product(product_collection, product):
             print(product)
             return product  
     except Exception as e:
-        print(f'create_address.error: {e}')
+        print(f'create_product.error: {e}')
         
 async def get_product_by_id(product_collection, product_id):
     try:
@@ -17,7 +17,6 @@ async def get_product_by_id(product_collection, product_id):
             return data
     except Exception as e:
         print(f'get_product.error: {e}')
-
 
 async def delete_product_by_id(product_collection, product_id):
     try:

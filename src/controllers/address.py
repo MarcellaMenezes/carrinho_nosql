@@ -1,7 +1,8 @@
 from src.models.address import (
     create_address,
     get_address_by_user_id,
-    delete_address_by_id
+    delete_address_by_id,
+    get_address_that_is_delivery
 )
 
 from src.models.user import(
@@ -51,4 +52,8 @@ async def address_crud():
         result = await delete_address_by_id(address_collection, id_address)
         print(result)
 
+    elif option == '4':
+        result = await get_address_that_is_delivery(address_collection, email)
+        print(result)
+        
     await disconnect_db()
