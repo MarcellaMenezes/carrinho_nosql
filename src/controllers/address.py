@@ -1,8 +1,7 @@
-from operator import add
 from src.models.address import (
     create_address,
     get_address_by_user_id,
-    delete_addres_by_id
+    delete_address_by_id
 )
 
 from src.models.user import(
@@ -20,7 +19,7 @@ async def address_crud():
     address_collection = db.address_collection
     
     address = [{
-                "street": "Rua dos Bobos, Numero 0",
+                "street": "Rua dos Pedras, Numero 0",
                 "cep": "8465312",
                 "district": "São Paulo",
                 "city": "São Paulo",
@@ -30,6 +29,7 @@ async def address_crud():
     
     email = "marcella@gmail.com"
     id_user = "632f647bc186b86c9796e48a"
+    id_address = "632f80a80b546aebcf15fbfa"
         
 
     if option == '1':
@@ -46,6 +46,9 @@ async def address_crud():
             id_user
         )
         print(address)
-
+        
+    elif option == '3':
+        result = await delete_address_by_id(address_collection, id_address)
+        print(result)
 
     await disconnect_db()
