@@ -27,6 +27,16 @@ async def delete_order_item_by_id(order_item_collection, order_item_id):
             return {'status': 'order_item deleted'}
     except Exception as e:
         print(f'delete_order_item.error: {e}')
+        
+async def delete_order_item_by_order_id(order_item_collection, order_id):
+    try:
+        order_item = await order_item_collection.delete_one(
+            {'orders._id': ObjectId(order_id)}
+        )
+        if order_item.deleted_count:
+            return {'status': 'order_item deleted'}
+    except Exception as e:
+        print(f'delete_order_item.error: {e}')
 
 
 async def update_price_order_item(order_item_collection, order_id, new_price):

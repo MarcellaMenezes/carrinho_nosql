@@ -9,6 +9,10 @@ from src.models.address import (
     get_address_that_is_delivery
 )
 
+from src.models.order_item import (
+    delete_order_item_by_order_id
+)
+
 from src.server.database import connect_db, db, disconnect_db
 
 
@@ -17,6 +21,7 @@ async def orders_crud():
     
     await connect_db()
     order_collection = db.order_collection
+    order_items_collection = db.order_items_collection
     address_collection = db.address_collection
     
     order = {
@@ -45,6 +50,7 @@ async def orders_crud():
         print(order)
         
     elif option == '3':
+        result = await delete_order_item_by_order_id(order_items_collection, id_order)
         result = await delete_order_by_id(order_collection, id_order)
         print(result)
         

@@ -32,7 +32,7 @@ async def order_items_crud():
     
     id_order = "6330c8d6a2a296dadb408ab1"
     id_product = "6330e8c60f0a24e1645c4d10"
-    id_order_item = "6330ffafd24640bbd7f0dd32"
+    id_order_item = "6330fff3a0b1e02186530d89"
     
     if option == '1':
         order = await get_order_by_id(order_collection, id_order)
