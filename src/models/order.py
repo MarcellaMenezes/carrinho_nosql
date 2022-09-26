@@ -2,7 +2,6 @@ from bson.objectid import ObjectId
 
 async def create_order(order_collection, order):
     try:
-       
         order = await order_collection.insert_one(order)
         if order.inserted_id:
             print(order)
@@ -28,3 +27,15 @@ async def delete_order_by_id(order_collection, order_id):
             return {'status': 'order deleted'}
     except Exception as e:
         print(f'delete_order.error: {e}')
+        
+async def update_price_order(order_collection, order_id, new_price):
+    order = await order_collection.update_one(
+        {"_id" : ObjectId(order_id)},
+        {
+            "$set" : {"price": new_price}
+        })
+    
+    if order.modified_count:
+        return True, order.modified_count
+
+    return False, 0

@@ -1,7 +1,12 @@
 from src.models.order import (
     create_order,
     get_order_by_id,
-    delete_order_by_id
+    delete_order_by_id,
+    update_price_order
+)
+
+from src.models.address import (
+    get_address_that_is_delivery
 )
 
 from src.server.database import connect_db, db, disconnect_db
@@ -12,6 +17,7 @@ async def orders_crud():
     
     await connect_db()
     order_collection = db.order_collection
+    address_collection = db.address_collection
     
     order = {
         "user":{},
@@ -20,10 +26,15 @@ async def orders_crud():
         "address": {} 
     }
 
-    id_order = "633090a9cba890a2f3fb6427"
+    email = "marcella@gmail.com"
+    id_order = "6330c8d6a2a296dadb408ab1"
     
     if option == '1':
-        # create order
+        main_address = await get_address_that_is_delivery(address_collection, email)
+        print(main_address)
+        if main_address != None:
+            order["user"] = main_address['user']
+            order["address"] = main_address['address']
         order = await create_order(order_collection, order)   
     elif option == '2':
         # get order
@@ -35,6 +46,11 @@ async def orders_crud():
         
     elif option == '3':
         result = await delete_order_by_id(order_collection, id_order)
+        print(result)
+        
+    elif option == '4':
+        new_price = 1
+        result = await update_price_order(order_collection, id_order, new_price)
         print(result)
 
     await disconnect_db()

@@ -60,7 +60,7 @@ async def get_address_that_is_delivery(address_collection, user_email):
         async for user in address_collection.aggregate ([
             {
                 "$match":{
-                    "user.email": "marcella@gmail.com",
+                    "user.email": user_email,
                     "user.is_active": True
                 }
             },
@@ -69,14 +69,14 @@ async def get_address_that_is_delivery(address_collection, user_email):
             },
             {
                 "$match": {
-                        'address.is_delivery':True
+                        'address.is_delivery': True
                     }
             }
         ]): 
             lista.append(user)
         
-        print(lista)
-        # if data:
-        #     return data
+        if len(lista) > 0:
+            return lista[0]
+        
     except Exception as e:
         print(f'get_address_delivery.error: {e}')
